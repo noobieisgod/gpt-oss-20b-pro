@@ -6,6 +6,7 @@ import pytest
 
 from oss20b_pro.config import AppConfig, load_config
 from oss20b_pro.model.backend_base import build_backend
+from oss20b_pro.model.llama_server_backend import LlamaServerBackend
 from oss20b_pro.model.mock_backend import MockBackend
 from oss20b_pro.model.transformers_backend import TransformersBackend
 from oss20b_pro.utils.errors import (
@@ -20,6 +21,13 @@ def test_backend_selection_from_env(tmp_path: Path, monkeypatch: pytest.MonkeyPa
     config = load_config(cwd=tmp_path, env={"OSS20B_BACKEND": "mock"})
     backend = build_backend(config)
     assert isinstance(backend, MockBackend)
+
+
+def test_llama_server_backend_selection_from_env(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.setattr(Path, "home", lambda: tmp_path / "home")
+    config = load_config(cwd=tmp_path, env={"OSS20B_BACKEND": "llama_server"})
+    backend = build_backend(config)
+    assert isinstance(backend, LlamaServerBackend)
 
 
 def test_mock_backend_streaming() -> None:

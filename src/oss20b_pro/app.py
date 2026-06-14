@@ -9,7 +9,7 @@ from oss20b_pro.logging_setup import setup_logging
 
 
 def build_parser() -> argparse.ArgumentParser:
-    parser = argparse.ArgumentParser(prog="oss", description="Local gpt-oss-20b wrapper.")
+    parser = argparse.ArgumentParser(prog="oss20b", description="Local gpt-oss-20b wrapper.")
     subparsers = parser.add_subparsers(dest="command")
 
     chat_parser = subparsers.add_parser("chat", help="Start an interactive chat session.")

@@ -2,3 +2,7 @@ backend = "transformers"
 model_path = "C:\\Users\\Andy\\.ollama\\models"
 default_mode = "normal"
 debug = false
+server_base_url = "http://localhost:8080/v1"
+server_model = "gpt-oss-20b"
+server_timeout_seconds = 120
+context_length = 32768

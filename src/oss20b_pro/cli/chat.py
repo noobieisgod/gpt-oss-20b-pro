@@ -20,7 +20,7 @@ def run_chat(config: AppConfig) -> int:
     format_controller = FormatController()
     backend = None
 
-    print("oss chat v0.1")
+    print("oss20b chat v0.1")
     print("Type /help for commands or /exit to quit.")
 
     while True:
@@ -51,9 +51,12 @@ def run_chat(config: AppConfig) -> int:
             print(f"[debug] task={task.name} mode={session.mode} profile={profile.name}")
             if backend is not None:
                 info = backend.info()
-                print(f"[debug] backend={info.name} status={info.status} model_path={info.model_path}")
+                print(
+                    f"[debug] backend={info.name} status={info.status} "
+                    f"model_path={info.model_path} details={info.details}"
+                )
             else:
-                print(f"[debug] backend={config.backend} status=not_initialized model_path={config.model_path}")
+                print(f"[debug] backend={config.backend} status=not_initialized {_configured_backend_target(config)}")
 
         try:
             if backend is None:
@@ -90,10 +93,10 @@ def _handle_command(
         session.debug = action.value == "on"
         print(f"Debug {'on' if session.debug else 'off'}.")
         if session.debug:
-            print(f"[debug] configured_backend={config.backend} model_path={config.model_path}")
+            print(f"[debug] configured_backend={config.backend} {_configured_backend_target(config)}")
             if backend is not None and hasattr(backend, "info"):
                 info = backend.info()
-                print(f"[debug] backend={info.name} status={info.status}")
+                print(f"[debug] backend={info.name} status={info.status} details={info.details}")
         return
 
     print(action.message or "Unknown command. Type /help for commands.")
@@ -104,6 +107,12 @@ def _format_error(error: Oss20bError, debug: bool) -> str:
     if debug and error.__cause__ is not None:
         message += f"\n[debug] cause={error.__cause__!r}"
     return message
+
+
+def _configured_backend_target(config: AppConfig) -> str:
+    if config.backend == "llama_server":
+        return f"server_url={config.server_base_url} server_model={config.server_model}"
+    return f"model_path={config.model_path}"
 
 
 HELP_TEXT = """Commands:

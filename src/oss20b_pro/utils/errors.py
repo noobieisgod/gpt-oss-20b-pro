@@ -31,3 +31,23 @@ class MissingBackendDependencyError(BackendError):
 
 class ModelLoadError(BackendError):
     """Raised when backend model loading fails."""
+
+
+class ServerUnreachableError(BackendError):
+    """Raised when a configured local model server cannot be reached."""
+
+
+class ServerTimeoutError(BackendError):
+    """Raised when a configured local model server times out."""
+
+
+class ServerResponseStatusError(BackendError):
+    """Raised when a model server returns a non-success status."""
+
+
+class InvalidBackendResponseError(BackendError):
+    """Raised when a backend response is not shaped as expected."""
+
+
+class MalformedStreamEventError(BackendError):
+    """Raised when a streaming backend emits a malformed event."""

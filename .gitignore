@@ -7,3 +7,4 @@ venv/
 build/
 dist/
 oss20b.toml
+llama-*-bin-*/

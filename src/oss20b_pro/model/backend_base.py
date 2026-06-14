@@ -42,4 +42,12 @@ def build_backend(config: AppConfig) -> ModelBackend:
         from oss20b_pro.model.transformers_backend import TransformersBackend
 
         return TransformersBackend(config.model_path)
+    if config.backend == "llama_server":
+        from oss20b_pro.model.llama_server_backend import LlamaServerBackend
+
+        return LlamaServerBackend(
+            base_url=config.server_base_url,
+            model=config.server_model,
+            timeout_seconds=config.server_timeout_seconds,
+        )
     raise ConfigError(f"Unsupported backend '{config.backend}'.")

@@ -22,6 +22,7 @@ dev = [
 
 [project.scripts]
 oss = "oss20b_pro.app:main"
+oss20b = "oss20b_pro.app:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]
