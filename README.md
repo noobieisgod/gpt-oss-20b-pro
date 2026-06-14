@@ -2,31 +2,31 @@
 
 `gpt-oss-20b-pro` is a local command-line wrapper for `gpt-oss-20b`.
 
-The goal is to keep the user experience simple, like chatting with one local model, while the wrapper provides a clean foundation for backends, modes, prompt formatting, routing, and future tools.
+The goal is to keep the experience simple, like chatting with one local model, while the wrapper provides a clean foundation for backends, modes, prompt formatting, routing, debugging, and future tools.
 
 > Current status: **v0.1.2 pre-release**
 >
-> This is an early prototype. The wrapper can run in mock mode, validate Transformers-style model paths, and connect to an externally managed `llama.cpp` `llama-server` for real local generation.
+> This is an early prototype. It can run in mock mode, validate Transformers-style model paths, and connect to an externally managed `llama.cpp` `llama-server` for real local generation.
 
 ## Features
 
-* `oss20b chat` command-line chat interface
+* Local `oss20b chat` command-line chat interface
 * Windows launcher scripts for easier local testing
-* mock backend for testing the CLI without a model
-* Transformers backend validation with clear unsupported-format errors
-* `llama_server` backend for external `llama.cpp` OpenAI-compatible server runtime
-* quick, normal, and deep generation modes
-* slash commands for mode switching and debug output
-* config file and environment-variable support
-* clean error handling when the backend is missing or unreachable
-* test suite covering config, routing, commands, backend errors, and streaming behavior
+* `mock` backend for testing the CLI without a model
+* `transformers` backend validation with clear unsupported-format errors
+* `llama_server` backend for an external `llama.cpp` OpenAI-compatible server runtime
+* Quick, normal, and deep generation modes
+* Slash commands for mode switching and debug output
+* Config file and environment-variable support
+* Clean error handling when the backend is missing, unreachable, or unsupported
+* Test coverage for config, routing, commands, backend errors, and streaming behavior
 
 ## Current limitations
 
-* The wrapper does **not** start, install, manage, or supervise `llama-server`.
+* The wrapper does **not** install, start, manage, or supervise `llama-server`.
 * The real model backend requires a separate `llama.cpp` server already running.
 * The detected Ollama `gpt-oss:20b` storage is not loaded directly.
-* The Transformers backend expects a normal Hugging Face/Transformers-compatible model directory.
+* The `transformers` backend expects a normal Hugging Face/Transformers-compatible model directory.
 * Plain `oss20b` may not work unless the Python `Scripts` directory is on PATH.
 * On the current Windows/Codex setup, the bundled Python path may be needed.
 * No memory, RAG, web search, browser use, sub-agents, LoRA, file parsing, MCP, Playwright, or local API server yet.
@@ -45,7 +45,7 @@ Optional Transformers dependencies:
 python -m pip install -e .[transformers]
 ```
 
-If `python` is not on PATH, use the bundled Python path that works on this machine:
+If `python` is not on PATH, use the bundled Python path that works on the current development machine:
 
 ```powershell
 C:\Users\Andy\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe -m pip install -e .[dev]
@@ -311,5 +311,4 @@ Planned future work:
 * optional LoRA or adapter experiments
 
 ## License
-
-No license has been added yet.
+MIT
