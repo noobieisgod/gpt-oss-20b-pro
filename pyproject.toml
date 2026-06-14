@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "gpt-oss-20b-pro"
+version = "0.1.0"
+description = "Local CLI wrapper prototype for gpt-oss-20b."
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = []
+
+[project.optional-dependencies]
+transformers = [
+  "accelerate>=0.30",
+  "torch>=2.3",
+  "transformers>=4.44",
+]
+dev = [
+  "pytest>=8",
+]
+
+[project.scripts]
+oss = "oss20b_pro.app:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]

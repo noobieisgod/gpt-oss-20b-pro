@@ -1,0 +1,4 @@
+backend = "transformers"
+model_path = "C:\\Users\\Andy\\.ollama\\models"
+default_mode = "normal"
+debug = false
