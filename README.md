@@ -18,6 +18,16 @@ python -m pip install -e .[transformers]
 
 ## Run
 
+Fastest local wrapper command from the repo root:
+
+```powershell
+.\run-oss20b.ps1
+```
+
+This sets `OSS20B_BACKEND=llama_server` only when it is not already set, then starts the wrapper. It does not start or manage `llama-server`.
+
+Installed console command:
+
 ```powershell
 oss20b chat
 ```
@@ -122,6 +132,12 @@ Future versions can add a GGUF or llama.cpp backend without rewriting the CLI.
 
 v0.1.1 can connect to an already running OpenAI-compatible `llama-server`.
 
+If the local ignored llama.cpp runtime folder is present, start the server from the repo root with:
+
+```powershell
+.\start-llama-server.ps1
+```
+
 Example manual startup:
 
 ```powershell
@@ -136,6 +152,12 @@ oss20b chat
 ```
 
 The configured `server_base_url` should include `/v1`, for example `http://localhost:8080/v1`.
+
+If the wrapper reports that the server is unreachable, check that:
+
+- `llama-server` is running in a separate terminal.
+- The server is listening on the configured `server_base_url`.
+- `OSS20B_SERVER_BASE_URL` includes `/v1`, such as `http://localhost:8080/v1`.
 
 If you installed with the bundled Codex Python runtime and its Scripts directory is not on PATH, the full console script path is:
 
